@@ -1,0 +1,15 @@
+<?php
+/** @var \MageCloud\AiAssistant\Block\WidgetScript $block */
+/** @var \Magento\Framework\Escaper $escaper */
+$widgetUrl = $block->getWidgetUrl();
+?>
+<?php if ($widgetUrl && $block->isEnabled()): ?>
+<script>
+window.mageCloudAiConfig = {
+    pageType: '<?= $escaper->escapeJs($block->getPageType()) ?>',
+    productSku: '<?= $block->getProductSku() ?>'
+};
+</script>
+<script src="<?= $escaper->escapeUrl($widgetUrl) ?>" defer></script>
+<?php endif; ?>
+

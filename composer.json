@@ -1,0 +1,25 @@
+{
+    "name": "magecloud/magento2-ai-assistant",
+    "description": "MageCloud AI Assistant widget integration for Magento 2",
+    "type": "magento2-module",
+    "license": "MIT",
+    "require": {
+        "php": "^8.1",
+        "magento/framework": "*",
+        "magento/module-backend": "*",
+        "magento/module-checkout": "*",
+        "magento/module-config": "*",
+        "magento/module-customer": "*",
+        "magento/module-quote": "*",
+        "magento/module-store": "*",
+        "magento/module-ui": "*"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "MageCloud\\AiAssistant\\": ""
+        }
+    }
+}
