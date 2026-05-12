@@ -12,6 +12,7 @@ Injects a third-party AI Assistant widget script into all frontend pages.
 ```bash
 composer require magecloud/magento2-ai-assistant
 bin/magento setup:upgrade
+bin/magento setup:di:compile
 bin/magento cache:flush
 ```
 
@@ -23,6 +24,7 @@ bin/magento cache:flush
 
 ```bash
 bin/magento setup:upgrade
+bin/magento setup:di:compile
 bin/magento cache:flush
 ```
 
