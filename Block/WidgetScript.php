@@ -6,6 +6,7 @@ namespace Comerix\AiAssistant\Block;
 
 use Comerix\AiAssistant\Model\ViewedProducts;
 use Comerix\AiAssistant\Service\Config;
+use Magento\Catalog\Api\CategoryRepositoryInterface;
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Customer\Model\Session as CustomerSession;
@@ -26,6 +27,7 @@ class WidgetScript extends Template
      * @param QuoteIdMaskFactory $quoteIdMaskFactory
      * @param QuoteIdMaskResource $quoteIdMaskResource
      * @param ProductRepositoryInterface $productRepository
+     * @param CategoryRepositoryInterface $categoryRepository
      * @param ViewedProducts $viewedProducts
      * @param LoggerInterface $psrLogger
      * @param array $data
@@ -38,6 +40,7 @@ class WidgetScript extends Template
         private readonly QuoteIdMaskFactory $quoteIdMaskFactory,
         private readonly QuoteIdMaskResource $quoteIdMaskResource,
         private readonly ProductRepositoryInterface $productRepository,
+        private readonly CategoryRepositoryInterface $categoryRepository,
         private readonly ViewedProducts $viewedProducts,
         private readonly LoggerInterface $psrLogger,
         array $data = []
@@ -185,6 +188,62 @@ class WidgetScript extends Template
         try {
             $productId = (int) $this->getRequest()->getParam('id');
             return $this->productRepository->getById($productId)->getSku();
+        } catch (NoSuchEntityException $e) {
+            $this->psrLogger->error($e->getMessage(), ['exception' => $e]);
+            return '';
+        }
+    }
+
+    /**
+     * @return string
+     */
+    public function getProductName(): string
+    {
+        if ($this->getPageType() !== 'product') {
+            return '';
+        }
+
+        try {
+            $productId = (int) $this->getRequest()->getParam('id');
+            return (string) $this->productRepository->getById($productId)->getName();
+        } catch (NoSuchEntityException $e) {
+            $this->psrLogger->error($e->getMessage(), ['exception' => $e]);
+            return '';
+        }
+    }
+
+    /**
+     * @return string
+     */
+    public function getCategoryName(): string
+    {
+        if ($this->getPageType() !== 'category') {
+            return '';
+        }
+
+        try {
+            $categoryId = (int) $this->getRequest()->getParam('id');
+            return (string) $this->categoryRepository->get($categoryId)->getName();
+        } catch (NoSuchEntityException $e) {
+            $this->psrLogger->error($e->getMessage(), ['exception' => $e]);
+            return '';
+        }
+    }
+
+    /**
+     * @return string
+     */
+    public function getCategoryUrl(): string
+    {
+        if ($this->getPageType() !== 'category') {
+            return '';
+        }
+
+        try {
+            $categoryId = (int) $this->getRequest()->getParam('id');
+            /** @var \Magento\Catalog\Model\Category $category */
+            $category = $this->categoryRepository->get($categoryId);
+            return (string) $category->getUrl();
         } catch (NoSuchEntityException $e) {
             $this->psrLogger->error($e->getMessage(), ['exception' => $e]);
             return '';

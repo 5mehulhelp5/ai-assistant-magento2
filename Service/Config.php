@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Comerix\AiAssistant\Service;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Framework\Encryption\EncryptorInterface;
 use Magento\Store\Model\ScopeInterface;
 
 class Config
@@ -24,9 +25,11 @@ class Config
 
     /**
      * @param ScopeConfigInterface $scopeConfig
+     * @param EncryptorInterface $encryptor
      */
     public function __construct(
-        private readonly ScopeConfigInterface $scopeConfig
+        private readonly ScopeConfigInterface $scopeConfig,
+        private readonly EncryptorInterface $encryptor
     ) {
     }
 
@@ -74,9 +77,11 @@ class Config
      */
     public function getReindexSecret(): string
     {
-        return (string) $this->scopeConfig->getValue(
+        $value = (string) $this->scopeConfig->getValue(
             self::XML_PATH_REINDEX_SECRET
         );
+
+        return $value ? $this->encryptor->decrypt($value) : '';
     }
 
     /**

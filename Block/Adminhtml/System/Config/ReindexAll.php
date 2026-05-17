@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Comerix\AiAssistant\Block\Adminhtml\System\Config;
 
 use Magento\Backend\Block\Template\Context;
+use Magento\Catalog\Model\Product\Attribute\Source\Status;
+use Magento\Catalog\Model\ResourceModel\Product\CollectionFactory;
 use Magento\Config\Block\System\Config\Form\Field;
 use Magento\Framework\Data\Form\Element\AbstractElement;
 
@@ -12,10 +14,14 @@ class ReindexAll extends Field
 {
     /**
      * @param Context $context
+     * @param CollectionFactory $productCollectionFactory
      * @param array<string, mixed> $data
      */
-    public function __construct(Context $context, array $data = [])
-    {
+    public function __construct(
+        Context $context,
+        private readonly CollectionFactory $productCollectionFactory,
+        array $data = []
+    ) {
         parent::__construct($context, $data);
     }
 
@@ -29,6 +35,10 @@ class ReindexAll extends Field
         $buttonId = $element->getHtmlId() . '_button';
         $statusId = $element->getHtmlId() . '_status';
 
+        $collection = $this->productCollectionFactory->create();
+        $collection->addAttributeToFilter('status', Status::STATUS_ENABLED);
+        $enabledCount = $collection->getSize();
+
         return sprintf(
             '<button type="button" id="%s" class="action-default scalable" onclick="%s">'
             . '<span>Run Reindex</span></button>'
@@ -39,7 +49,7 @@ class ReindexAll extends Field
                     var status = document.getElementById("%s");
                     btn.disabled = true;
                     status.innerHTML = "Running...";
-                    fetch("%s", {method:"POST", headers:{"X-Requested-With":"XMLHttpRequest"}})
+                    fetch("%s", {method:"POST", headers:{"X-Requested-With":"XMLHttpRequest","Content-Type":"application/x-www-form-urlencoded"},body:"form_key="+window.FORM_KEY})
                         .then(function(r){ return r.json(); })
                         .then(function(data){
                             status.innerHTML = data.message;
@@ -52,14 +62,16 @@ class ReindexAll extends Field
                             btn.disabled = false;
                         });
                 }
-            </script>',
+            </script>'
+            . '<p style="margin-top:6px;color:#666;">%d products enabled in catalog</p>',
             $buttonId,
             'reindexAll_' . $buttonId . '()',
             $statusId,
             $buttonId,
             $buttonId,
             $statusId,
-            $url
+            $url,
+            $enabledCount
         );
     }
 

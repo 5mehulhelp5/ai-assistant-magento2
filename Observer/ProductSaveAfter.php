@@ -54,10 +54,10 @@ class ProductSaveAfter implements ObserverInterface
 
         try {
             $this->curl->addHeader('Content-Type', 'application/json');
-            $this->curl->addHeader('Authorization', 'Bearer ' . $secret);
+            $this->curl->addHeader('x-reindex-secret', $secret);
             $this->curl->post(
                 $serverUrl . '/api/reindex-product',
-                (string) json_encode(['sku' => $product->getSku(), 'secret' => $secret])
+                (string) json_encode(['sku' => $product->getSku()])
             );
 
             $status = $this->curl->getStatus();

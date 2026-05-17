@@ -3,12 +3,19 @@
 /** @var \Magento\Framework\Escaper $escaper */
 $widgetUrl = $block->getWidgetUrl();
 ?>
-<?php if ($widgetUrl && $block->isEnabled()): ?>
+<?php if ($widgetUrl && $block->isEnabled()):
+    $pageType = $block->getPageType();
+    $config = ['pageType' => $pageType];
+    if ($pageType === 'product') {
+        $config['productSku']  = $block->getProductSku();
+        $config['productName'] = $block->getProductName();
+    } elseif ($pageType === 'category') {
+        $config['categoryName'] = $block->getCategoryName();
+        $config['categoryUrl']  = $block->getCategoryUrl();
+    }
+?>
 <script>
-window.comerixAiConfig = {
-    pageType: '<?= $escaper->escapeJs($block->getPageType()) ?>',
-    productSku: '<?= $block->getProductSku() ?>'
-};
+window.comerixAiConfig = <?= /* @noEscape */ json_encode($config, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;
 </script>
 <script src="<?= $escaper->escapeUrl($widgetUrl) ?>"
         data-server="<?= $escaper->escapeUrl($block->getChatServerUrl()) ?>"

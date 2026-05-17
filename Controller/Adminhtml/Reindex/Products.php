@@ -49,22 +49,22 @@ class Products extends Action
 
         try {
             $this->curl->addHeader('Content-Type', 'application/json');
-            $this->curl->addHeader('Authorization', 'Bearer ' . $secret);
+            $this->curl->addHeader('x-reindex-secret', $secret);
             $this->curl->post(
-                $serverUrl . '/api/reindex-all',
-                (string) json_encode(['secret' => $secret])
+                $serverUrl . '/api/reindex-products',
+                '{}'
             );
 
             $status = $this->curl->getStatus();
 
             if ($status < 200 || $status >= 300) {
-                $this->logger->warning('Comerix_AiAssistant: reindex-all request failed.', ['status' => $status]);
+                $this->logger->warning('Comerix_AiAssistant: reindex-products request failed.', ['status' => $status]);
                 return $result->setData(['success' => false, 'message' => sprintf('Request failed with status %d.', $status)]);
             }
 
             return $result->setData(['success' => true, 'message' => 'Reindex completed successfully.']);
         } catch (\Exception $e) {
-            $this->logger->error('Comerix_AiAssistant: reindex-all exception: ' . $e->getMessage());
+            $this->logger->error('Comerix_AiAssistant: reindex-products exception: ' . $e->getMessage());
             return $result->setData(['success' => false, 'message' => 'An error occurred. Please check the logs.']);
         }
     }
