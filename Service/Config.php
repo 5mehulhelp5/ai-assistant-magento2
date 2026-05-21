@@ -22,6 +22,8 @@ class Config
     private const XML_PATH_SUBTITLE = 'comerix_ai_assistant/chat_widget/subtitle';
     private const XML_PATH_WELCOME_MESSAGE = 'comerix_ai_assistant/chat_widget/welcome_message';
     private const XML_PATH_POSITION = 'comerix_ai_assistant/chat_widget/position';
+    private const XML_PATH_PP_WIDGET_ENABLED = 'comerix_ai_assistant/pp_widget/enable_pp_widget';
+    private const XML_PATH_PP_WIDGET_URL = 'comerix_ai_assistant/pp_widget/pp_widget_url';
 
     /**
      * @param ScopeConfigInterface $scopeConfig
@@ -134,6 +136,32 @@ class Config
             ScopeInterface::SCOPE_STORE,
             $storeId
         ) ?: 'Hi! How can we help you today?');
+    }
+
+    /**
+     * @param int|null $storeId
+     * @return string
+     */
+    public function getPpWidgetUrl(?int $storeId = null): string
+    {
+        return (string) $this->scopeConfig->getValue(
+            self::XML_PATH_PP_WIDGET_URL,
+            ScopeInterface::SCOPE_STORE,
+            $storeId
+        );
+    }
+
+    /**
+     * @param int|null $storeId
+     * @return bool
+     */
+    public function isProductPageWidgetEnabled(?int $storeId = null): bool
+    {
+        return $this->scopeConfig->isSetFlag(
+            self::XML_PATH_PP_WIDGET_ENABLED,
+            ScopeInterface::SCOPE_STORE,
+            $storeId
+        );
     }
 
     /**

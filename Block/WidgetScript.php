@@ -113,6 +113,22 @@ class WidgetScript extends Template
     }
 
     /**
+     * @return string
+     */
+    public function getPpWidgetUrl(): string
+    {
+        return $this->config->getPpWidgetUrl();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isProductPageWidgetEnabled(): bool
+    {
+        return $this->config->isProductPageWidgetEnabled();
+    }
+
+    /**
      * @return bool
      */
     public function isCustomer(): bool

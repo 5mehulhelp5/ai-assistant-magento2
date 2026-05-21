@@ -1,0 +1,13 @@
+<?php
+/** @var \Comerix\AiAssistant\Block\WidgetScript $block */
+/** @var \Magento\Framework\Escaper $escaper */
+?>
+<?php if ($block->isEnabled() && $block->isProductPageWidgetEnabled() && $block->getWidgetUrl()): ?>
+<div id="ai-assistant-product-page-container" style="margin-top: 16px; margin-bottom: 24px"></div>
+<script src="<?= $escaper->escapeUrl($block->getPpWidgetUrl()) ?>"
+        data-target="#ai-assistant-product-page-container"
+        data-accent="<?= $escaper->escapeHtml($block->getWidgetColor()) ?>"
+        data-sku="<?= $escaper->escapeUrl($block->getProductSku()) ?>"
+        async>
+</script>
+<?php endif; ?>

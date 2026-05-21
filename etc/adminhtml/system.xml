@@ -57,6 +57,23 @@
                     <source_model>Comerix\AiAssistant\Model\Config\Source\Position</source_model>
                 </field>
             </group>
+            <group id="pp_widget" translate="label" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Product Page Widget</label>
+                <field id="enable_pp_widget" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Product Page Quick Chat Widget</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="comerix_ai_assistant/general/enabled">1</field>
+                    </depends>
+                </field>
+                <field id="pp_widget_url" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Widget Script URL</label>
+                    <comment>URL of the product page quick chat widget script.</comment>
+                    <depends>
+                        <field id="comerix_ai_assistant/general/enabled">1</field>
+                    </depends>
+                </field>
+            </group>
             <group id="indexes" translate="label" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Indexes</label>
                 <field id="reindex_all" translate="label" type="button" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
