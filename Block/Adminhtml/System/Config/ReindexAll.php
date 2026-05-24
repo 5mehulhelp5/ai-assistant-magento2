@@ -52,7 +52,7 @@ class ReindexAll extends Field
                     fetch("%s", {method:"POST", headers:{"X-Requested-With":"XMLHttpRequest","Content-Type":"application/x-www-form-urlencoded"},body:"form_key="+window.FORM_KEY})
                         .then(function(r){ return r.json(); })
                         .then(function(data){
-                            status.innerHTML = data.message;
+                            status.textContent = data.message;
                             status.style.color = data.success ? "green" : "red";
                             btn.disabled = false;
                         })

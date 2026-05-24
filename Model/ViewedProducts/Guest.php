@@ -9,7 +9,7 @@ use Magento\Customer\Model\SessionFactory as CustomerSessionFactory;
 
 class Guest
 {
-    private const int MAX_VIEWED = 5;
+    private const MAX_VIEWED = 5;
 
     /**
      * @param CustomerSessionFactory $customerSessionFactory

@@ -4,4 +4,8 @@
         <observer name="comerix_ai_assistant_product_save_after"
                   instance="Comerix\AiAssistant\Observer\ProductSaveAfter"/>
     </event>
+    <event name="catalog_product_delete_after">
+        <observer name="comerix_ai_assistant_product_delete_after"
+                  instance="Comerix\AiAssistant\Observer\ProductDeleteAfter"/>
+    </event>
 </config>

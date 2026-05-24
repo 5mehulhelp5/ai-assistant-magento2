@@ -9,7 +9,7 @@ use Comerix\AiAssistant\Model\ViewedProducts\Customer as ViewedProductsCustomer;
 
 class ViewedProducts
 {
-    public const string SESSION_KEY = 'aiassistant_viewed_products';
+    public const SESSION_KEY = 'aiassistant_viewed_products';
 
     /**
      * @param SessionFactory $customerSessionFactory

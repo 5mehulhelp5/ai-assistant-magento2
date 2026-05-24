@@ -10,7 +10,7 @@ use Magento\Catalog\Model\Product;
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 
-class ProductSaveAfter implements ObserverInterface
+class ProductDeleteAfter implements ObserverInterface
 {
     /**
      * @param Config $config
@@ -35,10 +35,6 @@ class ProductSaveAfter implements ObserverInterface
         /** @var Product $product */
         $product = $observer->getEvent()->getProduct();
 
-        if (!$product->hasDataChanges()) {
-            return;
-        }
-
-        $this->reindexProduct->reindexProduct($product->getSku(), 'save');
+        $this->reindexProduct->reindexProduct($product->getSku(), 'delete');
     }
 }
