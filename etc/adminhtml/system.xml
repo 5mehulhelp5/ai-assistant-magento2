@@ -80,6 +80,10 @@
                     <label>Reindex Products</label>
                     <frontend_model>Comerix\AiAssistant\Block\Adminhtml\System\Config\ReindexAll</frontend_model>
                 </field>
+                <field id="reindex_cms_pages" translate="label" type="button" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Reindex CMS Pages</label>
+                    <frontend_model>Comerix\AiAssistant\Block\Adminhtml\System\Config\ReindexCmsPages</frontend_model>
+                </field>
             </group>
         </section>
     </system>

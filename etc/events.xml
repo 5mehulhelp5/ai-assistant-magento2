@@ -8,4 +8,12 @@
         <observer name="comerix_ai_assistant_product_delete_after"
                   instance="Comerix\AiAssistant\Observer\ProductDeleteAfter"/>
     </event>
+    <event name="cms_page_save_after">
+        <observer name="comerix_ai_assistant_cms_page_save_after"
+                  instance="Comerix\AiAssistant\Observer\CmsPageSaveAfter"/>
+    </event>
+    <event name="cms_page_delete_after">
+        <observer name="comerix_ai_assistant_cms_page_delete_after"
+                  instance="Comerix\AiAssistant\Observer\CmsPageDeleteAfter"/>
+    </event>
 </config>
