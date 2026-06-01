@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
-        <referenceContainer name="product.info.main">
-            <block name="aiassistant.product.embedding"
+        <referenceContainer name="sidebar.main">
+            <block name="aiassistant.category.widget"
                    class="Comerix\AiAssistant\Block\WidgetScript"
                    template="Comerix_AiAssistant::widget_additional.phtml"
-                   after="product.info.addtocart"
-                   ifconfig="comerix_ai_assistant/widget_additional_config/enable_pp_widget"/>
+                   before="-"
+                   ifconfig="comerix_ai_assistant/widget_additional_config/enable_category_widget"/>
         </referenceContainer>
     </body>
 </page>

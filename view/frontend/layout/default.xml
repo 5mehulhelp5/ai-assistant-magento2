@@ -4,7 +4,8 @@
         <referenceContainer name="footer">
             <block name="comerix.ai_assistant.widget_script"
                    class="Comerix\AiAssistant\Block\WidgetScript"
-                   template="Comerix_AiAssistant::widget_script.phtml"/>
+                   template="Comerix_AiAssistant::widget_script.phtml"
+                   ifconfig="comerix_ai_assistant/general/enabled"/>
         </referenceContainer>
     </body>
 </page>

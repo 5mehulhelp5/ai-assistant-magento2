@@ -22,8 +22,10 @@ class Config
     private const XML_PATH_SUBTITLE = 'comerix_ai_assistant/chat_widget/subtitle';
     private const XML_PATH_WELCOME_MESSAGE = 'comerix_ai_assistant/chat_widget/welcome_message';
     private const XML_PATH_POSITION = 'comerix_ai_assistant/chat_widget/position';
-    private const XML_PATH_PP_WIDGET_ENABLED = 'comerix_ai_assistant/pp_widget/enable_pp_widget';
-    private const XML_PATH_PP_WIDGET_URL = 'comerix_ai_assistant/pp_widget/pp_widget_url';
+    private const XML_PATH_PP_WIDGET_ENABLED = 'comerix_ai_assistant/widget_additional_config/enable_pp_widget';
+    private const XML_PATH_PP_WIDGET_URL = 'comerix_ai_assistant/widget_additional_config/pp_widget_url';
+    private const XML_PATH_CATEGORY_WIDGET_ENABLED = 'comerix_ai_assistant/widget_additional_config/enable_category_widget';
+    private const XML_PATH_CART_WIDGET_ENABLED = 'comerix_ai_assistant/widget_additional_config/enable_cart_widget';
 
     /**
      * @param ScopeConfigInterface $scopeConfig
@@ -159,6 +161,32 @@ class Config
     {
         return $this->scopeConfig->isSetFlag(
             self::XML_PATH_PP_WIDGET_ENABLED,
+            ScopeInterface::SCOPE_STORE,
+            $storeId
+        );
+    }
+
+    /**
+     * @param int|null $storeId
+     * @return bool
+     */
+    public function isCategoryWidgetEnabled(?int $storeId = null): bool
+    {
+        return $this->scopeConfig->isSetFlag(
+            self::XML_PATH_CATEGORY_WIDGET_ENABLED,
+            ScopeInterface::SCOPE_STORE,
+            $storeId
+        );
+    }
+
+    /**
+     * @param int|null $storeId
+     * @return bool
+     */
+    public function isCartWidgetEnabled(?int $storeId = null): bool
+    {
+        return $this->scopeConfig->isSetFlag(
+            self::XML_PATH_CART_WIDGET_ENABLED,
             ScopeInterface::SCOPE_STORE,
             $storeId
         );

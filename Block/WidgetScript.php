@@ -9,6 +9,7 @@ use Comerix\AiAssistant\Service\Config;
 use Magento\Catalog\Api\CategoryRepositoryInterface;
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Checkout\Model\Session as CheckoutSession;
+use Magento\Cms\Model\Page as CmsPage;
 use Magento\Customer\Model\Session as CustomerSession;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\View\Element\Template;
@@ -30,6 +31,7 @@ class WidgetScript extends Template
      * @param CategoryRepositoryInterface $categoryRepository
      * @param ViewedProducts $viewedProducts
      * @param LoggerInterface $psrLogger
+     * @param CmsPage $cmsPage
      * @param array $data
      */
     public function __construct(
@@ -43,6 +45,7 @@ class WidgetScript extends Template
         private readonly CategoryRepositoryInterface $categoryRepository,
         private readonly ViewedProducts $viewedProducts,
         private readonly LoggerInterface $psrLogger,
+        private readonly CmsPage $cmsPage,
         array $data = []
     ) {
         parent::__construct($context, $data);
@@ -131,9 +134,35 @@ class WidgetScript extends Template
     /**
      * @return bool
      */
+    public function isCategoryWidgetEnabled(): bool
+    {
+        return $this->config->isCategoryWidgetEnabled();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isCartWidgetEnabled(): bool
+    {
+        return $this->config->isCartWidgetEnabled();
+    }
+
+    /**
+     * @return bool
+     */
     public function isCustomer(): bool
     {
         return $this->customerSession->isLoggedIn();
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getCustomerId(): ?int
+    {
+        return $this->customerSession->isLoggedIn()
+            ? (int) $this->customerSession->getCustomerId()
+            : null;
     }
 
     /**
@@ -229,6 +258,14 @@ class WidgetScript extends Template
     }
 
     /**
+     * @return int
+     */
+    public function getCategoryId(): int
+    {
+        return (int) $this->getRequest()->getParam('id');
+    }
+
+    /**
      * @return string
      */
     public function getCategoryName(): string
@@ -244,6 +281,27 @@ class WidgetScript extends Template
             $this->psrLogger->error($e->getMessage(), ['exception' => $e]);
             return '';
         }
+    }
+
+    /**
+     * @return string
+     */
+    public function getPageUrl(): string
+    {
+        return $this->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true]);
+    }
+
+    /**
+     * @return string
+     */
+    public function getPageName(): string
+    {
+        return match ($this->getPageType()) {
+            'product'  => $this->getProductName(),
+            'category' => $this->getCategoryName(),
+            'cms'      => (string) $this->cmsPage->getTitle(),
+            default    => '',
+        };
     }
 
     /**
