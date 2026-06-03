@@ -5,7 +5,7 @@ $widgetUrl = $block->getWidgetUrl();
 ?>
 <?php if ($widgetUrl):
     $pageType = $block->getPageType();
-    $config = ['pageType' => $pageType];
+    $config['pageType'] = $pageType;
     $config['pageUrl']  = $block->getPageUrl();
     $config['pageName'] = $block->getPageName();
     if ($block->getCustomerId() !== null) {
@@ -22,11 +22,6 @@ window.comerixAiConfig = <?= /* @noEscape */ json_encode($config, JSON_HEX_TAG |
 </script>
 <script src="<?= $escaper->escapeUrl($widgetUrl) ?>"
         data-server="<?= $escaper->escapeUrl($block->getChatServerUrl()) ?>"
-        data-accent="<?= $escaper->escapeHtml($block->getWidgetColor()) ?>"
-        data-title="<?= $escaper->escapeHtml($block->getTitle()) ?>"
-        data-subtitle="<?= $escaper->escapeHtml($block->getSubtitle()) ?>"
-        data-welcome="<?= $escaper->escapeHtml($block->getWelcomeMessage()) ?>"
-        data-position="<?= $escaper->escapeHtml($block->getPosition()) ?>"
         defer>
 </script>
 <?php endif; ?>

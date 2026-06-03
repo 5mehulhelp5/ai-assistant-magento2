@@ -17,11 +17,6 @@ class Config
     private const XML_PATH_WIDGET_URL = 'comerix_ai_assistant/general/widget_url';
     private const XML_PATH_CHAT_SERVER_URL = 'comerix_ai_assistant/general/chat_server_url';
     private const XML_PATH_REINDEX_SECRET = 'comerix_ai_assistant/general/reindex_secret';
-    private const XML_PATH_WIDGET_COLOR = 'comerix_ai_assistant/chat_widget/widget_color';
-    private const XML_PATH_TITLE = 'comerix_ai_assistant/chat_widget/title';
-    private const XML_PATH_SUBTITLE = 'comerix_ai_assistant/chat_widget/subtitle';
-    private const XML_PATH_WELCOME_MESSAGE = 'comerix_ai_assistant/chat_widget/welcome_message';
-    private const XML_PATH_POSITION = 'comerix_ai_assistant/chat_widget/position';
     private const XML_PATH_PP_WIDGET_ENABLED = 'comerix_ai_assistant/widget_additional_config/enable_pp_widget';
     private const XML_PATH_PP_WIDGET_URL = 'comerix_ai_assistant/widget_additional_config/pp_widget_url';
     private const XML_PATH_CATEGORY_WIDGET_ENABLED = 'comerix_ai_assistant/widget_additional_config/enable_category_widget';
@@ -92,58 +87,6 @@ class Config
      * @param int|null $storeId
      * @return string
      */
-    public function getWidgetColor(?int $storeId = null): string
-    {
-        return (string) $this->scopeConfig->getValue(
-            self::XML_PATH_WIDGET_COLOR,
-            ScopeInterface::SCOPE_STORE,
-            $storeId
-        );
-    }
-
-    /**
-     * @param int|null $storeId
-     * @return string
-     */
-    public function getTitle(?int $storeId = null): string
-    {
-        return (string) ($this->scopeConfig->getValue(
-            self::XML_PATH_TITLE,
-            ScopeInterface::SCOPE_STORE,
-            $storeId
-        ) ?: 'Chat with us');
-    }
-
-    /**
-     * @param int|null $storeId
-     * @return string
-     */
-    public function getSubtitle(?int $storeId = null): string
-    {
-        return (string) ($this->scopeConfig->getValue(
-            self::XML_PATH_SUBTITLE,
-            ScopeInterface::SCOPE_STORE,
-            $storeId
-        ) ?: 'Your personal AI assistant is here and ready to go');
-    }
-
-    /**
-     * @param int|null $storeId
-     * @return string
-     */
-    public function getWelcomeMessage(?int $storeId = null): string
-    {
-        return (string) ($this->scopeConfig->getValue(
-            self::XML_PATH_WELCOME_MESSAGE,
-            ScopeInterface::SCOPE_STORE,
-            $storeId
-        ) ?: 'Hi! How can we help you today?');
-    }
-
-    /**
-     * @param int|null $storeId
-     * @return string
-     */
     public function getPpWidgetUrl(?int $storeId = null): string
     {
         return (string) $this->scopeConfig->getValue(
@@ -190,18 +133,5 @@ class Config
             ScopeInterface::SCOPE_STORE,
             $storeId
         );
-    }
-
-    /**
-     * @param int|null $storeId
-     * @return string
-     */
-    public function getPosition(?int $storeId = null): string
-    {
-        return (string) ($this->scopeConfig->getValue(
-            self::XML_PATH_POSITION,
-            ScopeInterface::SCOPE_STORE,
-            $storeId
-        ) ?: 'right');
     }
 }

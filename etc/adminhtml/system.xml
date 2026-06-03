@@ -37,26 +37,6 @@
                     </depends>
                 </field>
             </group>
-            <group id="chat_widget" translate="label" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
-                <label>Chat Widget Configurations</label>
-                <field id="title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Title</label>
-                </field>
-                <field id="subtitle" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Subtitle</label>
-                </field>
-                <field id="welcome_message" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Welcome Message</label>
-                </field>
-                <field id="widget_color" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Widget Color</label>
-                    <frontend_model>Comerix\AiAssistant\Block\Adminhtml\System\Config\ColorPicker</frontend_model>
-                </field>
-                <field id="position" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Position</label>
-                    <source_model>Comerix\AiAssistant\Model\Config\Source\Position</source_model>
-                </field>
-            </group>
             <group id="widget_additional_config" translate="label" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Widget Additional Configurations</label>
                 <field id="pp_widget_url" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">

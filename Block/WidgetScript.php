@@ -78,46 +78,6 @@ class WidgetScript extends Template
     /**
      * @return string
      */
-    public function getWidgetColor(): string
-    {
-        return $this->config->getWidgetColor();
-    }
-
-    /**
-     * @return string
-     */
-    public function getTitle(): string
-    {
-        return $this->config->getTitle();
-    }
-
-    /**
-     * @return string
-     */
-    public function getSubtitle(): string
-    {
-        return $this->config->getSubtitle();
-    }
-
-    /**
-     * @return string
-     */
-    public function getWelcomeMessage(): string
-    {
-        return $this->config->getWelcomeMessage();
-    }
-
-    /**
-     * @return string
-     */
-    public function getPosition(): string
-    {
-        return $this->config->getPosition();
-    }
-
-    /**
-     * @return string
-     */
     public function getPpWidgetUrl(): string
     {
         return $this->config->getPpWidgetUrl();
