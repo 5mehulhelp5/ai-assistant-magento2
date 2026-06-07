@@ -273,6 +273,34 @@ class WidgetScript extends Template
     }
 
     /**
+     * Builds the JS config payload (window.comerixAiConfig) shared by the widget templates.
+     *
+     * @return array<string, mixed>
+     */
+    public function getWidgetConfig(): array
+    {
+        $pageType = $this->getPageType();
+
+        $config = [
+            'pageType' => $pageType,
+            'pageUrl'  => $this->getPageUrl(),
+            'pageName' => $this->getPageName(),
+        ];
+
+        if ($this->getCustomerId() !== null) {
+            $config['customerId'] = $this->getCustomerId();
+        }
+
+        if ($pageType === 'product') {
+            $config['productSku'] = $this->getProductSku();
+        } elseif ($pageType === 'category') {
+            $config['categoryId'] = $this->getCategoryId();
+        }
+
+        return $config;
+    }
+
+    /**
      * @return string
      */
     public function getCategoryUrl(): string

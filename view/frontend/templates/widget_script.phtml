@@ -2,24 +2,10 @@
 /** @var \Comerix\AiAssistant\Block\WidgetScript $block */
 /** @var \Magento\Framework\Escaper $escaper */
 $widgetUrl = $block->getWidgetUrl();
-$config = [];
 ?>
-<?php if ($widgetUrl && $block->isEnabled()):
-    $pageType = $block->getPageType();
-    $config['pageType'] = $pageType;
-    $config['pageUrl']  = $block->getPageUrl();
-    $config['pageName'] = $block->getPageName();
-    if ($block->getCustomerId() !== null) {
-        $config['customerId'] = $block->getCustomerId();
-    }
-    if ($pageType === 'product') {
-        $config['productSku']  = $block->getProductSku();
-    } elseif ($pageType === 'category') {
-        $config['categoryId'] = $block->getCategoryId();
-    }
-?>
+<?php if ($widgetUrl && $block->isEnabled()): ?>
 <script>
-window.comerixAiConfig = <?= /* @noEscape */ json_encode($config, JSON_THROW_ON_ERROR | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;
+window.comerixAiConfig = <?= /* @noEscape */ json_encode($block->getWidgetConfig(), JSON_THROW_ON_ERROR | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;
 </script>
 <script src="<?= $escaper->escapeUrl($widgetUrl) ?>"
         data-server="<?= $escaper->escapeUrl($block->getChatServerUrl()) ?>"
