@@ -54,7 +54,14 @@
                     </depends>
                 </field>
                 <field id="enable_category_widget" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Enable Category Quick Chat Widget</label>
+                    <label>Enable Category Bottom Widget</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="comerix_ai_assistant/general/enabled">1</field>
+                    </depends>
+                </field>
+                <field id="enable_category_sidebar_widget" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Category Sidebar Widget</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <depends>
                         <field id="comerix_ai_assistant/general/enabled">1</field>

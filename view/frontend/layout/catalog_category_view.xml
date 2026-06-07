@@ -4,8 +4,15 @@
         <referenceContainer name="sidebar.main">
             <block name="aiassistant.category.widget"
                    class="Comerix\AiAssistant\Block\WidgetScript"
-                   template="Comerix_AiAssistant::widget_additional.phtml"
+                   template="Comerix_AiAssistant::widget_category_sidebar.phtml"
                    before="-"
+                   ifconfig="comerix_ai_assistant/widget_additional_config/enable_category_sidebar_widget"/>
+        </referenceContainer>
+        <referenceContainer name="content">
+            <block name="aiassistant.category.widget.bottom"
+                   class="Comerix\AiAssistant\Block\WidgetScript"
+                   template="Comerix_AiAssistant::widget_category.phtml"
+                   after="category.products"
                    ifconfig="comerix_ai_assistant/widget_additional_config/enable_category_widget"/>
         </referenceContainer>
     </body>

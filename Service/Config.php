@@ -20,6 +20,7 @@ class Config
     private const XML_PATH_PP_WIDGET_ENABLED = 'comerix_ai_assistant/widget_additional_config/enable_pp_widget';
     private const XML_PATH_PP_WIDGET_URL = 'comerix_ai_assistant/widget_additional_config/pp_widget_url';
     private const XML_PATH_CATEGORY_WIDGET_ENABLED = 'comerix_ai_assistant/widget_additional_config/enable_category_widget';
+    private const XML_PATH_CATEGORY_SIDEBAR_WIDGET_ENABLED = 'comerix_ai_assistant/widget_additional_config/enable_category_sidebar_widget';
     private const XML_PATH_CART_WIDGET_ENABLED = 'comerix_ai_assistant/widget_additional_config/enable_cart_widget';
 
     /**
@@ -117,6 +118,19 @@ class Config
     {
         return $this->scopeConfig->isSetFlag(
             self::XML_PATH_CATEGORY_WIDGET_ENABLED,
+            ScopeInterface::SCOPE_STORE,
+            $storeId
+        );
+    }
+
+    /**
+     * @param int|null $storeId
+     * @return bool
+     */
+    public function isCategorySidebarWidgetEnabled(?int $storeId = null): bool
+    {
+        return $this->scopeConfig->isSetFlag(
+            self::XML_PATH_CATEGORY_SIDEBAR_WIDGET_ENABLED,
             ScopeInterface::SCOPE_STORE,
             $storeId
         );

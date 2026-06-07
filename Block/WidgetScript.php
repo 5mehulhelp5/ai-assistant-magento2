@@ -102,6 +102,14 @@ class WidgetScript extends Template
     /**
      * @return bool
      */
+    public function isCategorySidebarWidgetEnabled(): bool
+    {
+        return $this->config->isCategorySidebarWidgetEnabled();
+    }
+
+    /**
+     * @return bool
+     */
     public function isCartWidgetEnabled(): bool
     {
         return $this->config->isCartWidgetEnabled();

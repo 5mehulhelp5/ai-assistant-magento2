@@ -1,29 +1,28 @@
 <?php
 /** @var \Comerix\AiAssistant\Block\WidgetScript $block */
 /** @var \Magento\Framework\Escaper $escaper */
-$widgetUrl = $block->getWidgetUrl();
+$widgetUrl = $block->getPpWidgetUrl();
 $config = [];
 ?>
 <?php if ($widgetUrl && $block->isEnabled()):
+    $config = [];
     $pageType = $block->getPageType();
     $config['pageType'] = $pageType;
-    $config['pageUrl']  = $block->getPageUrl();
     $config['pageName'] = $block->getPageName();
-    if ($block->getCustomerId() !== null) {
-        $config['customerId'] = $block->getCustomerId();
-    }
+
     if ($pageType === 'product') {
         $config['productSku']  = $block->getProductSku();
     } elseif ($pageType === 'category') {
         $config['categoryId'] = $block->getCategoryId();
     }
 ?>
+<div id="ai-assistant-additional-container-category" style="margin-top: 16px; margin-bottom: 24px"></div>
 <script>
-window.comerixAiConfig = <?= /* @noEscape */ json_encode($config, JSON_THROW_ON_ERROR | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;
+    window.comerixAiConfig = <?= /* @noEscape */ json_encode($config, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;
 </script>
 <script src="<?= $escaper->escapeUrl($widgetUrl) ?>"
-        data-server="<?= $escaper->escapeUrl($block->getChatServerUrl()) ?>"
-        defer>
+        data-target="#ai-assistant-additional-container-category"
+        data-type="<?= $escaper->escapeUrl($block->getPageType()) ?>"
+        async>
 </script>
 <?php endif; ?>
-
